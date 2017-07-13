@@ -4,5 +4,24 @@ var db = require('../index.js')
 
 
 module.exports = db.define('user', {
-  name: Sequelize.STRING,
+  name: {
+    type: Sequelize.STRING,
+    allowNull : false
+  },
+  email: {
+    type: Sequelize.STRING,
+    validate : {
+      isEmail : true
+    }
+  },
+  image: Sequelize.STRING
+}, {
+  scopes: {
+    populated: () => ({
+      include: [{
+        model: db.model('campus'),
+        as: 'school'
+      }]
+    })
+  }
 })

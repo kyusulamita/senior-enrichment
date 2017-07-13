@@ -1,15 +1,22 @@
-const db = require('./server/db');
-const Campus = require('./server/db/models/author');
-const Student = require('./server/db/models/channel');
+const db = require('./db');
+const Campus = require('./db/models/campus');
+const User = require('./db/models/user');
 
-const campuses = [
-  { name: 'really_random' },
-  { name: 'generally_speaking' },
-  { name: 'dogs_of_fullstack' },
-  { name: 'lunch_planning' }
-];
+const campuses = [{
+  name: 'really_random',
+  location: 'Grand Rapids'
+}, {
+  name: 'generally_speaking',
+  location: 'Ann Arbor'
+}, {
+  name: 'dogs_of_fullstack',
+  location: 'New York'
+}, {
+  name: 'lunch_planning',
+  location: 'Piedra Blanca'
+}];
 
-const students = [{
+const users = [{
   name: 'Cody',
   image: '/images/cody.jpg'
 }, {
@@ -65,36 +72,18 @@ const students = [{
   image: '/images/odie.jpg'
 }];
 
-const id = () => Math.round(Math.random() * (authors.length - 1)) + 1;
-
-const messages = [
-  { authorId: id(), content: 'I like React!', channelId: 1 },
-  { authorId: id(), content: 'I like Redux!', channelId: 1 },
-  { authorId: id(), content: 'I like React-Redux!', channelId: 1 },
-  { authorId: id(), content: 'I like writing web apps!', channelId: 2 },
-  { authorId: id(), content: 'You should learn JavaScript!', channelId: 2 },
-  { authorId: id(), content: 'JavaScript is pretty great!', channelId: 2 },
-  { authorId: id(), content: 'Dogs are great!', channelId: 3 },
-  { authorId: id(), content: 'Cats are also great!', channelId: 3 },
-  { authorId: id(), content: 'Why must we fight so?', channelId: 3 },
-  { authorId: id(), content: 'I want to get tacos!', channelId: 4 },
-  { authorId: id(), content: 'I want to get salad!', channelId: 4 },
-  { authorId: id(), content: 'I want a taco salad!', channelId: 4 }
-];
-
 const seed = () =>
-  Promise.all(authors.map(author =>
-    Author.create(author))
+  Promise.all(campuses.map(campus =>
+    Campus.create(campus))
   )
   .then(() =>
-  Promise.all(channels.map(channel =>
-    Channel.create(channel))
+  Promise.all(users.map(user =>
+    User.create(user))
   ))
   // .then(() =>
   // Promise.all(messages.map(message =>
   //   Message.create(message))
   // )
-);
 
 const main = () => {
   console.log('Syncing db...');
