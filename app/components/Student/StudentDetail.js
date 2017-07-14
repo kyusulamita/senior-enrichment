@@ -31,7 +31,6 @@ class StudentDetail extends React.Component {
     if (newProps.match.params.id !== this.props.match.params.id) {
       this.props.fetchStudentData();
     }
-
     this.setState({ student: newProps.student });
   }
   onClick(){

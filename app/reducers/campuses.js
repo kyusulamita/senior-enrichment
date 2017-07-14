@@ -62,13 +62,13 @@ export const removeCampus = id => dispatch => {
 }
 
 export const addCampus = campus => dispatch => {
-  axios.post('/api/users', campus)
+  axios.post('/api/campuses', campus)
        .then(res => dispatch(create(res.data)))
-       .catch(err => console.error(`Creating campus: ${campus} unsuccesful`, err))
+       .catch(err => console.error(`Creating campus: ${campus} unsuccesful`,campus, err))
 }
 
 export const updateCampus = (id, campus) => dispatch => {
-  axios.put(`/api/users/${id}`, campus)
+  axios.put(`/api/campuses/${id}`, campus)
        .then(res => dispatch(update(res.data)))
        .catch(err => console.error(`Updating campus: ${id} unsuccesful`, err))
 }

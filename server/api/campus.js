@@ -29,6 +29,7 @@ api.get('/', function (req, res, next) {
 });
 
 api.post('/', function (req, res, next) {
+  console.log('api post', req.body)
   Campus.create(req.body)
   .then(function (campus) {
     res.status(201).json(campus);

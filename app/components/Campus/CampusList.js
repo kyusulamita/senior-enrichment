@@ -77,7 +77,7 @@ class CampusList extends Component {
     const newCampus = {
       name: event.target.name.value,
       location: event.target.location.value,
-      image: dummy
+      image: 'dummy'
     }
     this.props.add(newCampus)
     event.target.name.value = ''
