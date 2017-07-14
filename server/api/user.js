@@ -20,7 +20,7 @@ api.param('id', function (req, res, next, id) {
 });
 
 api.get('/', function (req, res, next) {
-  User.findAll({})
+  User.scope('populated').findAll({})
   .then(function (users) {
     res.json(users);
   })
