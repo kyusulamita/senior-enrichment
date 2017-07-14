@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import CampusItem from './CampusItem';
 import StudentItem from '../Student/StudentItem';
 import { addStudent } from '../../reducers/students';
+import { updateCampus } from '../../reducers/campuses'
 
 /* -----------------    COMPONENT     ------------------ */
 
@@ -13,7 +14,8 @@ class CampusDetail extends Component {
 
   constructor(props) {
     super(props);
-    this.onSubmit = this.onSubmit.bind(this);
+    this.onSubmit = this.onSubmit.bind(this)
+    this.campusSubmit = this.campusSubmit.bind(this)
   }
 
   render() {
@@ -31,24 +33,50 @@ class CampusDetail extends Component {
             {
               campusStudents.map(student => <StudentItem student={student} key={student.id} />)
             }
-            <form className="list-group-item" onSubmit={this.onSubmit}>
-              <input
-                name="name"
-                type="text"
-                required
-                placeholder="Student Name"
-              />
-              <input
-                name="email"
-                type="text"
-                required
-                placeholder="Student Email"
-              />
-              <button type="submit" className="btn btn-warning btn-xs">
-                <span className="glyphicon glyphicon-plus" />
-              </button>
-            </form>
           </ul>
+        </div>
+        <div className="panel panel-warning">
+          <div className="panel-heading">
+            <h2 className="panel-title large-font">Edit Campus</h2>
+          </div>
+          <form className="list-group-item" onSubmit={this.campusSubmit}>
+            <input
+              name="name"
+              type="text"
+              placeholder={campus.name}
+            />
+            <input
+              name="location"
+              type="text"
+              placeholder={campus.location}
+            />
+            <button type="submit" className="btn btn-warning btn-xs">
+              <span className="glyphicon glyphicon-pencil" />
+            </button>
+          </form>
+        </div>
+        <div className="panel panel-warning">
+          <div className="panel-heading">
+            <h2 className="panel-title large-font">Add a student</h2>
+          </div>
+          <form className="list-group-item" onSubmit={this.onSubmit}>
+            <input
+              name="name"
+              type="text"
+              required
+              placeholder="Student Name"
+            />
+            <input
+              name="email"
+              type="text"
+              required
+              placeholder="Student Email"
+            />
+            <button type="submit" className="btn btn-warning btn-xs">
+              <span className="glyphicon glyphicon-plus" />
+            </button>
+          </form>
+
         </div>
       </div>
     );
@@ -68,6 +96,18 @@ class CampusDetail extends Component {
     event.target.name.value = ''
     event.target.email.value = ''
   }
+
+  campusSubmit(event) {
+    event.preventDefault()
+    const { edit, campus } = this.props
+    const moddedCampus = {
+      name: event.target.name.value || campus.name,
+      location: event.target.location.value || campus.location
+    }
+    edit(campus.id, moddedCampus)
+    event.target.name.value = ''
+    event.target.location.value = ''
+  }
 }
 
 /* -----------------    CONTAINER     ------------------ */
@@ -83,6 +123,9 @@ const mapState = (state , ownProps) => {
 const mapDispatch = (dispatch) => ({
   add: (studentToAdd) => {
     dispatch(addStudent(studentToAdd))
+  },
+  edit: (id, moddedCampus) => {
+    dispatch(updateCampus(id, moddedCampus))
   }
 })
 

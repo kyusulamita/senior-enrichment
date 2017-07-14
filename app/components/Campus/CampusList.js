@@ -41,7 +41,7 @@ class CampusList extends Component {
 
   newCampusForm() {
     return (
-      <div className="list-group-item min-content user-item">
+      <div className="list-group-item min-content">
         <form className="media" onSubmit={this.onSubmit}>
           <div className="media-left media-middle icon-container">
             <button

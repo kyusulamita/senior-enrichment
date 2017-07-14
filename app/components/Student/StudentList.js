@@ -31,39 +31,45 @@ class StudentList extends React.Component {
 
   newStudentForm() {
     return (
-      <form onSubmit={this.onSubmit} >
-        <ul className="list-group">
-          {/* <li className="list-group-item"> */}
-          <input
-            name="name"
-            type="text"
-            placeholder="Student name"
-          />
-          {/* </li> */}
-          {/* <li className="list-group-item"> */}
-          <input
-            name="email"
-            type="text"
-            placeholder="Student email"
-          />
-          {/* </li> */}
-          {/* <li className="list-group-item"> */}
-          <select name="schoolId" defaultValue="" required>
-            <option value="" disabled>(select a campus)</option>
-            {
-              this.props.campuses.map(campus => (
-                <option key={campus.id} value={campus.id}>{campus.name}</option>
-              ))
-            }
-          </select>
+      <div className="list-group-item min-content">
+        <form className="media" onSubmit={this.onSubmit}>
+          <div className="media-left media-middle">
+            <button
+              type="submit"
+              className="glyphicon glyphicon-plus clickable"
+            />
+          </div>
+          <div className="media-body">
+            <h4 className="media-heading">
+              <input
+                name="name"
+                type="text"
+                required
+                placeholder="Student Name"
+              />
+            </h4>
+            <h4>
+              <input
+                name="email"
+                type="text"
+                required
+                placeholder="Student email"
+              />
+            </h4>
+            <div className="media-left">
+              <select name="schoolId" defaultValue="" required>
+                <option value="" disabled>(select a campus)</option>
+                {
+                  this.props.campuses.map(campus => (
+                    <option key={campus.id} value={campus.id}>{campus.name}</option>
+                  ))
+                }
+              </select>
+            </div>
+          </div>
+        </form>
+      </div>
 
-          <button
-            type="submit"
-          className="btn btn-warning btn-xs pull-right">
-            <span className="glyphicon glyphicon-plus" />
-          </button>
-        </ul>
-      </form>
     );
   }
 

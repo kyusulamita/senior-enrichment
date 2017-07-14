@@ -13,11 +13,6 @@ class StudentItem extends Component{
       <li className="list-group-item">
 
         <ul className="list-inline">
-          <button
-            className="btn btn-default btn-xs"
-            onClick={ () => remove(student.id) }>
-            <span className="glyphicon glyphicon-remove" />
-          </button>
           <li>
             <Link to={`/students/${student.id}`}>{student.name}</Link>
           </li>
@@ -27,8 +22,12 @@ class StudentItem extends Component{
           <li>
             <Link to={`/campuses/${student.schoolId}`}>{student.school.name}</Link>
           </li>
+          <button
+            className="btn btn-default btn-xs pull-right"
+            onClick={ () => remove(student.id) }>
+            <span className="glyphicon glyphicon-remove" />
+          </button>
         </ul>
-
       </li>
     )
   }
